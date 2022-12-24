@@ -10,7 +10,7 @@ import {
   FETCH_ORDERS
 } from './types';
 
-export const purchaseBurgerSuccess = (id, orderData) => {
+export const purchaseBurgerSuccess = (id:any, orderData:any) => {
   return {
     type: PURCHASE_BURGER_SUCCESS,
     orderId: id,
@@ -18,7 +18,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
   };
 };
 
-export const purchaseBurgerFail = error => {
+export const purchaseBurgerFail = (error:any) => {
   return {
     type: PURCHASE_BURGER_FAIL,
     error
@@ -31,7 +31,7 @@ export const purchaseBurgerStart = () => {
   };
 };
 
-export const purchaseBurger = (orderData, token) => {
+export const purchaseBurger = (orderData:any, token:any) => {
   return {
     type: PURCHASE_BURGER,
     orderData,
@@ -45,14 +45,14 @@ export const purchaseInit = () => {
   };
 };
 
-export const fetchOrdersSuccess = orders => {
+export const fetchOrdersSuccess = (orders:any) => {
   return {
     type: FETCH_ORDERS_SUCCESS,
     orders
   };
 };
 
-export const fetchOrdersFail = error => {
+export const fetchOrdersFail = (error:any) => {
   return {
     type: FETCH_ORDERS_FAIL,
     error
@@ -65,7 +65,7 @@ export const fetchOrdersStart = () => {
   };
 };
 
-export const fetchOrders = (token, userId) => {
+export const fetchOrders = (token:any, userId:any) => {
   return {
     type: FETCH_ORDERS,
     token,

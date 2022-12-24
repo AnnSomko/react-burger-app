@@ -5,11 +5,12 @@ import { Redirect } from "react-router-dom";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Input from "../../components/UI/Input/Input";
-import classes from "./Auth.css";
+import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../shared/utility";
+import { any } from "prop-types";
 
-function Auth(props) {
+function Auth(props:any) {
   const [state, setState] = useState({
     controls: {
       email: {
@@ -51,7 +52,7 @@ function Auth(props) {
   }, []);
 
   //nested objects old/new values
-  const inputChangedHandler = (event, controlName) => {
+  const inputChangedHandler = (event:any, controlName:any) => {
     const updatedControls = updateObject(state.controls, {
       [controlName]: updateObject(state.controls[controlName], {
         value: event.target.value,
@@ -67,9 +68,9 @@ function Auth(props) {
     });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = (event:any) => {
     event.preventDefault();
-    state.props.onAuth(
+    props.onAuth(
       state.controls.email.value,
       state.controls.password.value,
       state.isSignup
@@ -77,8 +78,9 @@ function Auth(props) {
   };
 
   const switchAuthModeHandler = () => {
-    setState((prevState) => {
+    setState((prevState:any) => {
       return {
+        ...prevState,
         isSignup: !prevState.isSignup,
       };
     });
@@ -91,31 +93,31 @@ function Auth(props) {
       config: state.controls[key],
     });
 
-    let form = formElementsArray.map((formEl) => (
+    let form:any = formElementsArray.map((formEl:any) => (
       <Input
         key={formEl.id}
         elementType={formEl.config.elementType}
         elementConfig={formEl.config.elementConfig}
         value={formEl.config.value}
-        changed={(e) => inputChangedHandler(e, formEl.id)}
+        changed={(e:any) => inputChangedHandler(e, formEl.id)}
         invalid={!formEl.config.valid}
         shouldValidate={formEl.config.validation}
         touched={formEl.config.touched}
       />
     ));
 
-    if (state.props.loading) {
+    if (props.loading) {
       form = <Spinner />;
     }
 
     let errorMessage = null;
-    if (state.props.error) {
-      errorMessage = <p>{state.props.error.message}</p>;
+    if (props.error) {
+      errorMessage = <p>{props.error.message}</p>;
     }
 
     let authRedirect = null;
-    if (state.props.isAuthenticated) {
-      authRedirect = <Redirect to={state.props.authRedirectPath} />;
+    if (props.isAuthenticated) {
+      authRedirect = <Redirect to={props.authRedirectPath} />;
     }
 
     return (
@@ -134,7 +136,7 @@ function Auth(props) {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
@@ -144,9 +146,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch:any) => {
   return {
-    onAuth: (email, password, isSignup) =>
+    onAuth: (email:any, password:any, isSignup:any) =>
       dispatch(actions.auth(email, password, isSignup)),
     onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath("/")),
   };

@@ -10,7 +10,7 @@ import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
 
-function App(props) {
+function App(props:any) {
   // state = {
   //   show: true
   // };
@@ -52,13 +52,13 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
   return {
     isAuthenticated: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch:any) => {
   return {
     onTryAutoSignup: () => dispatch(actions.authCheckState()),
   };

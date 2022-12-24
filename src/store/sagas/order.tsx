@@ -3,7 +3,7 @@ import axios from '../../axios-orders';
 
 import * as actions from '../actions';
 
-export function* purchaseBurgerSaga(action) {
+export function* purchaseBurgerSaga(action:any):  Generator<any, any, any> {
   yield put(actions.purchaseBurgerStart());
 
   try {
@@ -19,7 +19,7 @@ export function* purchaseBurgerSaga(action) {
   }
 }
 
-export function* fetchOrdersSaga(action) {
+export function* fetchOrdersSaga(action:any):Generator<any, any, any> {
   const queryParams =
     '?auth=' +
     action.token +
